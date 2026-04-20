@@ -196,26 +196,6 @@ python model1_self_pruning.py
 python model2_self_pruning.py
 </pre>
 
-<h1>📁 Output Files:</h1>
-<pre>
-outputs_v3/                    # Model 1 outputs
-├── gate_distribution.png      
-├── tradeoff.png              
-└── training_curves.png       
-
-outputs_model2/               # Model 2 outputs
-├── gate_distribution.png     
-├── tradeoff.png              
-├── training_curves.png       
-├── layer_sparsity.png        
-└── ckpts/                    # Model checkpoints
-    ├── lam0.3_best.pt        
-    ├── lam0.3_final.pt       
-    ├── lam1.0_best.pt        
-    ├── lam1.0_final.pt       
-    ├── lam3.0_best.pt        
-    └── lam3.0_final.pt       
-</pre>
 
 <h1>💻 Hardware Requirements:</h1>
 <ul>
