@@ -79,21 +79,21 @@ Total Params: 3,549,450 | Gate Params: 902,400 | Prunable Layers: 9
     <td>86.75%</td>
     <td>0.1063</td>
     <td>89.40%</td>
-  </tr>
+   </tr>
   <tr>
     <td>1.5</td>
     <td>59.17%</td>
     <td>93.38%</td>
     <td>0.0522</td>
     <td>94.79%</td>
-  </tr>
+   </tr>
   <tr>
     <td>4.0</td>
     <td>58.69%</td>
     <td><strong>96.99%</strong></td>
     <td>0.0224</td>
     <td>97.77%</td>
-  </tr>
+   </tr>
 </table>
 
 <h3>Model 2 Results (25 epochs, λ sweep)</h3>
@@ -104,28 +104,28 @@ Total Params: 3,549,450 | Gate Params: 902,400 | Prunable Layers: 9
     <th>Sparsity @T=15</th>
     <th>Gate Mean</th>
     <th>Neg Scores</th>
-  </tr>
+   </tr>
   <tr>
     <td>0.3</td>
     <td>51.04%</td>
     <td>99.65%</td>
     <td>0.0032</td>
     <td>~100%</td>
-  </tr>
+   </tr>
   <tr>
     <td>1.0</td>
     <td>50.77%</td>
     <td>99.75%</td>
     <td>0.0023</td>
     <td>~100%</td>
-  </tr>
+   </tr>
   <tr>
     <td><strong>3.0</strong></td>
     <td><strong>51.83%</strong></td>
     <td><strong>99.85%</strong></td>
     <td>0.0013</td>
     <td>~100%</td>
-  </tr>
+   </tr>
 </table>
 
 <h3>Per-Layer Sparsity (Model 2, λ=3.0)</h3>
@@ -151,19 +151,46 @@ L9: 80.6%  ████████████████████░░░
   <li><strong>Temperature annealing is critical:</strong> Soft gates early (T=1) allow differentiation, binary later (T=15-20) enforce pruning</li>
 </ul>
 
-<h1>demo screenshots:</h1>
+<h1>📺 Console Output Example:</h1>
+<pre>
+=================================================================
+  Self-Pruning Neural Network - CIFAR-10
+=================================================================
+  Device : cuda
+  GPU    : Tesla T4
+  Mechanism: Temperature-annealed sigmoid gates (T: 1 → 20)
+  Pruning: L1 penalty on gate values (normalised)
+=================================================================
 
-<h3>Gate Distribution (Model 1, λ=0.5)</h3>
-<img width="800" alt="gate_distribution" src="https://github.com/user-attachments/PLACEHOLDER_IMAGE_1" />
+─────────────────────────────────────────────────────────────────
+  λ=0.5  epochs=30  lr=0.001  gate_lr=0.005
+  T: 1.0→20.0  warmup=5ep  bs=256
+─────────────────────────────────────────────────────────────────
+  Params: 7,676,042  |  Gate params: 3,835,136
+  
+  Ep 1/30 train=31.8% test=40.6% sparsity=0.1% gate_mean=0.496
+  Ep 5/30 train=44.1% test=49.0% sparsity=46.5% gate_mean=0.424
+  Ep10/30 train=48.5% test=54.1% sparsity=71.6% gate_mean=0.268
+  Ep15/30 train=50.9% test=56.4% sparsity=79.2% gate_mean=0.169
+  Ep20/30 train=52.6% test=58.3% sparsity=83.2% gate_mean=0.126
+  Ep25/30 train=53.9% test=59.0% sparsity=85.6% gate_mean=0.111
+  Ep30/30 train=54.6% test=59.2% sparsity=86.8% gate_mean=0.106
 
-<h3>Training Curves (Model 1, all λ values)</h3>
-<img width="800" alt="training_curves" src="https://github.com/user-attachments/PLACEHOLDER_IMAGE_2" />
+  ✦ Final test accuracy         : 59.19%
+  ✦ Sparsity @T=20 (gates<0.01) : 86.75%
+  ✦ Gate scores < 0             : 89.40%
+  ✦ Pct gates < 0.1             : 89.1%
+  ✦ Pct gates > 0.9             : 10.3%
+</pre>
 
-<h3>Trade-off Analysis (Model 1)</h3>
-<img width="600" alt="tradeoff" src="https://github.com/user-attachments/PLACEHOLDER_IMAGE_3" />
-
-<h3>Per-Layer Sparsity (Model 2, λ=3.0)</h3>
-<img width="700" alt="layer_sparsity" src="https://github.com/user-attachments/PLACEHOLDER_IMAGE_4" />
+<h1>📊 Visualization Outputs:</h1>
+<p>The following plots are automatically generated after training:</p>
+<ul>
+  <li><strong>gate_distribution.png</strong> - Histogram of gate values (full distribution + zoomed regions)</li>
+  <li><strong>tradeoff.png</strong> - Accuracy vs Sparsity trade-off curve for different λ values</li>
+  <li><strong>training_curves.png</strong> - Training dynamics (accuracy, sparsity, gate mean, temperature)</li>
+  <li><strong>layer_sparsity.png</strong> - Per-layer sparsity comparison (Model 2 only)</li>
+</ul>
 
 <h1>🚀 Quick Start:</h1>
 
@@ -206,14 +233,3 @@ outputs_model2/               # Model 2 outputs
   <li><strong>GPU Memory:</strong> 2-4 GB</li>
   <li><strong>Storage:</strong> ~500 MB for data + checkpoints</li>
 </ul>
-
-<h1>📚 References:</h1>
-<ul>
-  <li>Han et al. "Learning both Weights and Connections for Efficient Neural Networks" (NIPS 2015)</li>
-  <li>Zhu & Gupta. "To Prune, or Not to Prune: Exploring the Efficacy of Pruning" (ICLR 2018)</li>
-  <li>Jang et al. "Gumbel-Softmax: Differentiable Sampling" (ICLR 2017)</li>
-  <li>Zhang et al. "mixup: Beyond Empirical Risk Minimization" (ICLR 2018)</li>
-</ul>
-
-<h1>📄 License:</h1>
-<p>MIT License</p>
