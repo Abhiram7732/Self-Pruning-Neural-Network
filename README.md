@@ -183,15 +183,6 @@ L9: 80.6%  ████████████████████░░░
   ✦ Pct gates > 0.9             : 10.3%
 </pre>
 
-<h1>📊 Visualization Outputs:</h1>
-<p>The following plots are automatically generated after training:</p>
-<ul>
-  <li><strong>gate_distribution.png</strong> - Histogram of gate values (full distribution + zoomed regions)</li>
-  <li><strong>tradeoff.png</strong> - Accuracy vs Sparsity trade-off curve for different λ values</li>
-  <li><strong>training_curves.png</strong> - Training dynamics (accuracy, sparsity, gate mean, temperature)</li>
-  <li><strong>layer_sparsity.png</strong> - Per-layer sparsity comparison (Model 2 only)</li>
-</ul>
-
 <h1>🚀 Quick Start:</h1>
 
 <pre>
